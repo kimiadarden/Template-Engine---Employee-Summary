@@ -52,7 +52,7 @@ async function mainStarting() {
                 type: "list",
                 message: `what the employee (${i})'s title?`,
                 name: "title",
-                choices: ["Engineer", "Intern", "Manager"]
+                choices: [ "Manager","Engineer", "Intern"]
             }
         ]).then((data) => {
 

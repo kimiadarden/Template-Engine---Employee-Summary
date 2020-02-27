@@ -6,9 +6,26 @@ const inquirer= require("inquirer");
 const path= require("path");
 
 async function mainStarting(){
+    let htmlForTeam = "";
+    let numberOfteam;
 
+    await inquirer.prompt(
+        {
+            type: "number",
+            message: "How many employee are in your group?",
+            name: "teamAmount"
+        }
+    )
+    .then((data) => {
 
-
+        numberOfteam = data.teamAmount + 1;
+    });
+    
+    if (numberOfteam === 0){
+        console.log("Your team has no members");
+        return;
+    }
+    
 
 
 

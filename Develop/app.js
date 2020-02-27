@@ -1,11 +1,11 @@
-const Manager= require("./lib/Manager");
-const Engineer= require("./lib/Engineer");
-const Intern= require("./lib/Intern");
-const fs= require("fs");
-const inquirer= require("inquirer");
-const path= require("path");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const fs = require("fs");
+const inquirer = require("inquirer");
+const path = require("path");
 
-async function mainStarting(){
+async function mainStarting() {
     let htmlForTeam = "";
     let numberOfteam;
 
@@ -16,23 +16,23 @@ async function mainStarting(){
             name: "teamAmount"
         }
     )
-    .then((data) => {
+        .then((data) => {
 
-        numberOfteam = data.teamAmount + 1;
-    });
-    
-    if (numberOfteam === 0){
+            numberOfteam = data.teamAmount + 1;
+        });
+
+    if (numberOfteam === 0) {
         console.log("Your team has no members");
         return;
     }
-    for(i = 1; i < numberOfteam; i++){
+    for (i = 1; i < numberOfteam; i++) {
 
         let name;
         let id;
         let title;
         let email;
 
-        await inquirer.prompt([ 
+        await inquirer.prompt([
             {
                 type: "input",
                 message: `What is the employee (${i})'s id?`,
@@ -54,23 +54,53 @@ async function mainStarting(){
                 name: "title",
                 choices: ["Engineer", "Intern", "Manager"]
             }
-        ])
+        ]).then((data) => {
+
+            // global variables to use in the html file
+            name = data.name;
+            id = data.id;
+            title = data.title;
+            email = data.email;
+        });
+
+        //deciding between Engineer, Intern, manager
+        switch (title) {
+            case "Manager":
+                await inquirer.prompt([
+                    {
+                        type: "input",
+                        message: "What is your Manager's Office Number?",
+                        name: "officeNo"
+                    }
+                ])
+                .then((data) => {
+                    const manager = new Manager(name, id, email, data.officeNo);
+
+                    teamMember = fs.readFileSync("templates/manager.html");
+
+                    htmlForTeam = htmlForTeam + "\n" + eval('`'+ teamMember +'`');
+                });
+
+                break;
 
 
 
+
+        }
+    }
     const mainHTML = fs.readFileSync("templates/main.html");
-    
-    htmlForTeam = eval('`'+ mainHTML +'`');
 
-    fs.writeFile("templates/finalPage.html", teamHTML, function(err) {
+    htmlForTeam = eval('`' + mainHTML + '`');
+
+    fs.writeFile("templates/finalPage.html", teamHTML, function (err) {
 
         if (err) {
-          return err;
+            return err;
         }
-      
+
         console.log("The final page was made succesfully!");
-      
-      });  
+
+    });
 }
 
 

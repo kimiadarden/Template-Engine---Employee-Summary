@@ -83,6 +83,35 @@ async function mainStarting() {
 
                 break;
 
+                case "Engineer":
+                    await inquirer.prompt([
+                        {
+                            type: "input",
+                            message: "What is your Engineer's GitHub?",
+                            name: "github"
+                        }
+                    ])
+                    .then((data) => {
+                        const engineer = new Engineer(name, id, email, data.github);
+                        teamMember = fs.readFileSync("templates/engineer.html");
+                        htmlForTeam = htmlForTeam + "\n" + eval('`'+ teamMember +'`');
+                    });
+                    break;
+                    
+                case "Intern":
+                    await inquirer.prompt([
+                        {
+                            type: "input",
+                            message: "Which school is the intern studying at?",
+                            name: "school"
+                        }
+                    ])
+                    .then((data) => {
+                        const intern = new Intern(name, id, email, data.school);
+                        teamMember = fs.readFileSync("templates/intern.html");
+                        htmlForTeam = htmlForTeam + "\n" + eval('`'+ teamMember +'`');
+                    });
+                    break;
 
 
 
@@ -92,7 +121,7 @@ async function mainStarting() {
 
     htmlForTeam = eval('`' + mainHTML + '`');
 
-    fs.writeFile("templates/finalPage.html", teamHTML, function (err) {
+    fs.writeFile("templates/finalPage.html", htmlForTeam, function (err) {
 
         if (err) {
             return err;

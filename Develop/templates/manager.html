@@ -1,17 +1,17 @@
 <div class="card m-3 " style="width: 20rem;">
 
     <div class="card-header text-white bg-primary">
-        <h2>name</h2>
-        <h4>role</h4>
+        <h2>${manager.name}</h2>
+        <h4>${manager.getRole()}</h4>
     </div>
 
     <div class="card-body bg-light text-dark">
 
 
         <ul class="list-group">
-            <li class="list-group-item" style="font-size: 14px;">ID:</li>
-            <li class="list-group-item" style="font-size: 14px;">Email: </li>
-            <li class="list-group-item" style="font-size: 14px;">Office Number:</li>
+            <li class="list-group-item" style="font-size: 14px;">ID:: ${manager.id}</li>
+            <li class="list-group-item" style="font-size: 14px;">Email: ${manager.email} </li>
+            <li class="list-group-item" style="font-size: 14px;">Office Number: ${manager.officeNumber}</li>
         </ul>
     </div>
 

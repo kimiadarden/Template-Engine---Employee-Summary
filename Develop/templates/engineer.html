@@ -1,17 +1,17 @@
-<div class="card m-3 " style="width: 20rem;">
+<div class="card m-3 " style="width: 30rem;">
 
     <div class="card-header text-white bg-primary">
-        <h2>name</h2>
-        <h4>role</h4>
+        <h2>${engineer.name}</h2>
+        <h4>${engineer.getRole()}</h4>
     </div>
 
     <div class="card-body bg-light text-dark">
 
 
         <ul class="list-group">
-            <li class="list-group-item" style="font-size: 14px;">ID:</li>
-            <li class="list-group-item" style="font-size: 14px;">Email: </li>
-            <li class="list-group-item" style="font-size: 14px;">GitHub:</li>
+            <li class="list-group-item" style="font-size: 14px;">ID:${engineer.id}</li>
+            <li class="list-group-item" style="font-size: 14px;">Email:${engineer.email} </li>
+            <li class="list-group-item" style="font-size: 14px;">GitHub:${engineer.github}</li>
         </ul>
     </div>
 
